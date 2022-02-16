@@ -25,6 +25,7 @@ public class FlockerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Input to spawn a boid
         if(Input.GetKeyDown(KeyCode.Q))
         {
             numberOfFlockersToSpawn = pressToSpawnAmount;
@@ -34,6 +35,7 @@ public class FlockerController : MonoBehaviour
                 numberOfFlockersToSpawn--;
             }
         }
+        //Change the behavior of all boids on the field to red.
         if(Input.GetKeyDown(KeyCode.R))
         {
             foreach(GameObject flocker in flockers)
@@ -41,6 +43,7 @@ public class FlockerController : MonoBehaviour
                 flocker.GetComponent<Flocker>().SetBehavior(Color.red);
             }
         }
+        //Change the behavior of all boids on the field to green.
         if (Input.GetKeyDown(KeyCode.G))
         {
             foreach (GameObject flocker in flockers)
@@ -48,6 +51,7 @@ public class FlockerController : MonoBehaviour
                 flocker.GetComponent<Flocker>().SetBehavior(Color.green);
             }
         }
+        //Change the behavior of all boids on the field to blue.
         if (Input.GetKeyDown(KeyCode.B))
         {
             foreach (GameObject flocker in flockers)
@@ -55,6 +59,7 @@ public class FlockerController : MonoBehaviour
                 flocker.GetComponent<Flocker>().SetBehavior(Color.blue);
             }
         }
+        //Change the behavior of all boids on the field to white.
         if (Input.GetKeyDown(KeyCode.T))
         {
             foreach (GameObject flocker in flockers)
@@ -62,6 +67,7 @@ public class FlockerController : MonoBehaviour
                 flocker.GetComponent<Flocker>().SetBehavior(Color.white);
             }
         }
+        //Change the behavior of all boids on the field to black.
         if (Input.GetKeyDown(KeyCode.Y))
         {
             foreach (GameObject flocker in flockers)
@@ -69,6 +75,7 @@ public class FlockerController : MonoBehaviour
                 flocker.GetComponent<Flocker>().SetBehavior(Color.black);
             }
         }
+        //Remove all boids from the field.
         if (Input.GetKeyDown(KeyCode.Z))
         {
             foreach (GameObject flocker in flockers)

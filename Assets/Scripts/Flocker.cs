@@ -41,7 +41,6 @@ public class Flocker : MonoBehaviour
     private Rigidbody rb;
     private SphereCollider viewRb;
     private Renderer rend;
-    private TrailRenderer trail;
     //seekrate should control how quickly the flocker conforms to it's neighbor's behaviors
     private float seekRate;
 
@@ -53,7 +52,6 @@ public class Flocker : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rend = GetComponent<Renderer>();
-        trail = GetComponent<TrailRenderer>();
         viewRb = view.GetComponent<SphereCollider>();
         viewRb.radius = viewDistance;
         //Temporary: assign a random flock behavior mod
@@ -119,12 +117,10 @@ public class Flocker : MonoBehaviour
 
     //Function to update flocker's color based on current aiBehavior
     //RGB values here are 0 to 1 floats and we use our flockBehaviorMod which should be 0 to 1 floats.
-    //Additionally, set the trail material to the same color
     void SetBehaviorColor()
     {
         Color behavColor = new Color(flockBehaviorMod.x - flockBehaviorVariance, flockBehaviorMod.y - flockBehaviorVariance, flockBehaviorMod.z - flockBehaviorVariance, 1);
         rend.material.SetColor("_Color", behavColor);
-        trail.material.SetColor("_Color", behavColor);
     }
 
     //Look at adjacent flockers and average their flocking mod vector with ours
