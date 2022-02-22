@@ -38,6 +38,13 @@ public class CameraController : MonoBehaviour
             cameraSpeed = 0.5f;
         }
 
+        //Reset camera button
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            cameraFocus.transform.position = new Vector3(0, 0, 0);
+            Debug.Log(cameraFocus.transform.position);
+        }
+
     }
 
     void FixedUpdate()

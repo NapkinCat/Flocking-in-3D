@@ -9,6 +9,8 @@ public class FlockerController : MonoBehaviour
     public GameObject flockerPrefab;
     public int numberOfFlockersToSpawn;
     public int pressToSpawnAmount;
+    public bool behaviorRaysViewable;
+    public bool flockerViewSphereViewable;
 
     private Vector3 spawnPos;
     
@@ -25,8 +27,10 @@ public class FlockerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         //Input to spawn a boid
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKey(KeyCode.Q))
         {
             numberOfFlockersToSpawn = pressToSpawnAmount;
             while (numberOfFlockersToSpawn > 0)
@@ -84,6 +88,26 @@ public class FlockerController : MonoBehaviour
             }
             flockers.Clear();
         }
+        //Toggle flocker viewable metrics
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            behaviorRaysViewable = !behaviorRaysViewable;
+            foreach (GameObject flocker in flockers)
+            {
+                flocker.GetComponent<Flocker>().SetBehaviorViewable(behaviorRaysViewable);
+            }
+        }
+        //Toggle flocker viewable metrics
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            flockerViewSphereViewable = !flockerViewSphereViewable;
+            foreach (GameObject flocker in flockers)
+            {
+                flocker.GetComponent<Flocker>().SetViewDistanceViewable(flockerViewSphereViewable);
+            }
+        }
+
+
     }
 
     //return an arbitrarily assigned vector 3 for spawn position.

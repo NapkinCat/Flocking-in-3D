@@ -9,8 +9,12 @@ public class Flocker : MonoBehaviour
 
     //view Variable will store a reference to the spherecollider child which we use to evaluate what the flocker can see and how far
     public GameObject view;
-    public float viewDistance = 4.0f;
-    public float desiredSeperation = 3.0f;
+    public GameObject viewMesh;
+    public GameObject alignmentVectorLine;
+    public GameObject cohesionVectorLine;
+    public GameObject seperationVectorLine;
+    public float viewDistance;
+    public float desiredSeperation;
     //This Flocker's Flocking Behavior where X = Cohesion, Y = Alignment, and Z = Separation;
     public Vector3 flockBehaviorMod;
     //Variables to control our direction of travel and the variance by which we scale our random behavior
@@ -41,8 +45,12 @@ public class Flocker : MonoBehaviour
     private Rigidbody rb;
     private SphereCollider viewRb;
     private Renderer rend;
+    private LineRenderer aVLRend;
+    private LineRenderer cVLRend;
+    private LineRenderer sVLRend;
     //seekrate should control how quickly the flocker conforms to it's neighbor's behaviors
     private float seekRate;
+
 
 
     #endregion
@@ -54,8 +62,18 @@ public class Flocker : MonoBehaviour
         rend = GetComponent<Renderer>();
         viewRb = view.GetComponent<SphereCollider>();
         viewRb.radius = viewDistance;
+        viewMesh.transform.localScale = new Vector3(viewDistance, viewDistance, viewDistance) * 2;
         //Temporary: assign a random flock behavior mod
         flockBehaviorMod = GetRandomVectorWithRange(flockBehaviorVariance, 1.0f + flockBehaviorVariance);
+
+        //manually assign vector visualization colors
+        aVLRend = alignmentVectorLine.GetComponent<LineRenderer>();
+        cVLRend = cohesionVectorLine.GetComponent<LineRenderer>();
+        sVLRend = seperationVectorLine.GetComponent<LineRenderer>();
+
+        aVLRend.material.SetColor("_Color", new Color(0, 1, 0, 0.2f));
+        cVLRend.material.SetColor("_Color", new Color(1, 0, 0, 0.2f));
+        sVLRend.material.SetColor("_Color", new Color(0, 0, 1, 0.2f));
 
         //Initialize willingness to change
         seekRate = Random.Range(0.0f, 1.0f);
@@ -73,6 +91,7 @@ public class Flocker : MonoBehaviour
         //Generate an a random initial direction to move in.
         forceDirection = GetRandomVectorWithRange(0, 0);
 
+        //Randomize metallic and glossiness
         rend.material.SetFloat("_Metallic", Random.Range(0f, 1f));
         rend.material.SetFloat("_Glossiness", Random.Range(0f, 1f));
     }
@@ -82,11 +101,15 @@ public class Flocker : MonoBehaviour
     {
         SetBehaviorColor();
         ConformWithNeighbors();
+        SetVisualizationMeshes();
+
+        
+
 
         //Sort Nearby Flockers by distance
         nearbyFlockers = nearbyFlockers.OrderBy(nearbyFlockers => Vector3.Distance(transform.position, nearbyFlockers.gameObject.transform.position)).ToList();
     }
-    // FixedUpdate to prefer physical updates
+    // FixedUpdate to prefer physics updates
     void FixedUpdate()
     {
         
@@ -115,12 +138,40 @@ public class Flocker : MonoBehaviour
         flockBehaviorMod = new Vector3(color.r + flockBehaviorVariance, color.g + flockBehaviorVariance, color.b + flockBehaviorVariance);
     }
 
+    public void SetVisualizationMeshes()
+    {
+        aVLRend.SetPosition(0, transform.position);
+        aVLRend.SetPosition(1, (alignmentVector.normalized * flockBehaviorMod.y * 10) + transform.position);
+        aVLRend.startWidth = flockBehaviorMod.y;
+
+        cVLRend.SetPosition(0, transform.position);
+        cVLRend.SetPosition(1, (cohesionVector.normalized * flockBehaviorMod.x * 10) + transform.position);
+        cVLRend.startWidth = flockBehaviorMod.x;
+
+        sVLRend.SetPosition(0, transform.position);
+        sVLRend.SetPosition(1, (seperationVector.normalized * flockBehaviorMod.z * 10) + transform.position);
+        sVLRend.startWidth = flockBehaviorMod.z;
+    }
+
     //Function to update flocker's color based on current aiBehavior
     //RGB values here are 0 to 1 floats and we use our flockBehaviorMod which should be 0 to 1 floats.
-    void SetBehaviorColor()
+    public void SetBehaviorColor()
     {
         Color behavColor = new Color(flockBehaviorMod.x - flockBehaviorVariance, flockBehaviorMod.y - flockBehaviorVariance, flockBehaviorMod.z - flockBehaviorVariance, 1);
         rend.material.SetColor("_Color", behavColor);
+    }
+
+    //Function to toggle the viewable metric meshes, aka if we can see the view distances of each flocker
+    public void SetViewDistanceViewable(bool tempBool)
+    {
+        viewMesh.SetActive(tempBool);
+    }
+
+    public void SetBehaviorViewable(bool tempBool)
+    {
+        alignmentVectorLine.SetActive(tempBool);
+        cohesionVectorLine.SetActive(tempBool);
+        seperationVectorLine.SetActive(tempBool);
     }
 
     //Look at adjacent flockers and average their flocking mod vector with ours

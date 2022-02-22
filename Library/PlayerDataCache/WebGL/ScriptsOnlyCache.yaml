@@ -9,16 +9,25 @@ ScriptsOnlyBuild:
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
+    - TMPro.TMP_ColorGradient
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
+    - TMPro.TextMeshProUGUI
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
+    - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.Image
   sceneClasses:
-    Assets/Scenes/MyScene.unity:
+    Assets/Scenes/Main.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -49,31 +58,47 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
-    - Class: 96
-      Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1664}
+      Script: {instanceID: 1510}
     - Class: 114
-      Script: {instanceID: 1718}
+      Script: {instanceID: 1688}
     - Class: 114
-      Script: {instanceID: 1968}
+      Script: {instanceID: 1746}
     - Class: 114
-      Script: {instanceID: 2544}
+      Script: {instanceID: 2022}
     - Class: 114
-      Script: {instanceID: 3372}
+      Script: {instanceID: 2320}
     - Class: 114
-      Script: {instanceID: 3600}
+      Script: {instanceID: 2432}
     - Class: 114
-      Script: {instanceID: 3630}
+      Script: {instanceID: 2474}
     - Class: 114
-      Script: {instanceID: 3632}
+      Script: {instanceID: 2598}
     - Class: 114
-      Script: {instanceID: 3872}
+      Script: {instanceID: 2642}
+    - Class: 114
+      Script: {instanceID: 2782}
+    - Class: 114
+      Script: {instanceID: 2868}
+    - Class: 114
+      Script: {instanceID: 3534}
+    - Class: 114
+      Script: {instanceID: 3698}
+    - Class: 114
+      Script: {instanceID: 3778}
+    - Class: 114
+      Script: {instanceID: 3812}
+    - Class: 114
+      Script: {instanceID: 3814}
+    - Class: 114
+      Script: {instanceID: 4076}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 120
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
@@ -87,7 +112,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
     - Class: 218
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -146,7 +179,13 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 5e09a9a4c1af4e91d45cc0a638681ba9
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
+  - hash:
+      serializedVersion: 2
+      Hash: 14cf470c9290142c5c1174296c925e77
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FlockerController
@@ -260,7 +299,7 @@ ScriptsOnlyBuild:
     className: InputField
   - hash:
       serializedVersion: 2
-      Hash: 881f507c6f34a4c8b0b71b02bea0bddc
+      Hash: 55a6d09e753a8d4d2dec1500d0221f6e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraController
@@ -494,7 +533,7 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 6e4d611365d7b54dca46bc4216cc4b69
+      Hash: 7adab4ca794614b2607b660c5d87b088
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Flocker
@@ -542,5 +581,5 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   platform: 20
   scenePathNames:
-  - Assets/Scenes/MyScene.unity
-  playerPath: C:/Users/Owner/Documents/Unity Projects/CreateWithCode/Flocking/WebGLBuild
+  - Assets/Scenes/Main.unity
+  playerPath: D:/Unity Builds/FlockingFirstUpload
